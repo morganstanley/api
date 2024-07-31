@@ -1,0 +1,120 @@
+# Morgan Stanley makes this available to you under the Apache License, Version 2.0 (the "License"). You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0. 
+# See the NOTICE file distributed with this work for additional information regarding copyright ownership.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+# See the License for the specific language governing permissions and limitations under the License.
+
+# Use https://www.gitignore.io/  to a get a more definitive .gitignore file depending on 
+# the language/IDE used for your project
+# e.g.
+# https://www.gitignore.io/api/visualstudio for VisualStudio
+# https://www.gitignore.io/api/IntelliJ for IntelliJ
+# https://www.gitignore.io/api/Eclipse for Eclipse
+# https://www.gitignore.io/api/csharp for C#
+# https://www.gitignore.io/api/Gradle for Gradle
+# https://www.gitignore.io/api/angular for Angular
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Mac
+.DS_Store
+
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff:
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea_modules/
+out/
+
+# CMake
+cmake-build-debug/
+cmake-build-release/
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+# VisualStudio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+**/Properties/launchSettings.json
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUNIT
+*.VisualState.xml
+TestResult.xml
+
+# Build tools
+# Maven
+log/
+target/
+.m2/
+
+# Gradle
+.gradle
+
+# Language specific
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+## Java ###
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+
+# virtual envs for python
+**/myenv/
+**/virtualenv/
+**/venv/
+
+# default config file, to prevent accidental commits of application config
+config.json
+
+# certificates and private keys. These should NEVER be committed.
+*.pem
+*.cer
+*.der

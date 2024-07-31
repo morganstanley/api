@@ -1,0 +1,10 @@
+{
+    "client_id": "CLIENT_ID_HERE",
+    "scopes": ["YOUR_SCOPE_HERE"],
+    "thumbprint": "CERT_THUMBPRINT_HERE",
+    "private_key_file": "certs/private_key.pem",
+    "tenant": "api.morganstanley.com",
+    "proxy_host": "my-proxy.website.com",
+    "proxy_port": "8080",
+    "url": "WEBSOCKET_URL_HERE"
+}

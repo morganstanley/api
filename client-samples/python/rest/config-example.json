@@ -1,0 +1,12 @@
+{
+  "client_id": "YOUR CLIENT ID",
+  "scopes": [
+    "API SCOPE"
+  ],
+  "thumbprint": "CERT THUMBPRINT",
+  "private_key_file": "PATH TO PRIVATE KEY IN PEM FORMAT",
+  "tenant": "api.morganstanley.com",
+  "proxy_host": "PROXY HOST HERE",
+  "proxy_port": "PROXY PORT",
+  "url": "https://api.morganstanley.com/rest-example"
+}
