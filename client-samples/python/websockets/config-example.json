@@ -1,10 +1,12 @@
 {
-    "client_id": "CLIENT_ID_HERE",
-    "scopes": ["YOUR_SCOPE_HERE"],
-    "thumbprint": "CERT_THUMBPRINT_HERE",
-    "private_key_file": "certs/private_key.pem",
-    "tenant": "api.morganstanley.com",
-    "proxy_host": "my-proxy.website.com",
-    "proxy_port": "8080",
-    "url": "WEBSOCKET_URL_HERE"
+  "client_id": "YOUR CLIENT ID",
+  "scopes": [
+    "API SCOPE"
+  ],
+  "thumbprint": "CERT THUMBPRINT",
+  "private_key_file": "PATH TO PRIVATE KEY IN PEM FORMAT",
+  "tenant": "api.morganstanley.com",
+  "proxy_host": "PROXY HOST HERE",
+  "proxy_port": "PROXY PORT",
+  "url": "wss://ws.api.morganstanley.com/websocket-example"
 }
