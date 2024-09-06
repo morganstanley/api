@@ -8,5 +8,6 @@
   "tenant": "api.morganstanley.com",
   "proxy_host": "PROXY HOST HERE",
   "proxy_port": "PROXY PORT",
-  "url": "wss://ws.api.morganstanley.com/websocket-example"
+  "url": "wss://ws.api.morganstanley.com/websocket-example",
+  "retry_bad_handshake_status": true
 }

@@ -165,6 +165,7 @@ class WebSocketHandler:
         url: str,
         client_app: ConfidentialClientApplication,
         scopes: List[str],
+        retry_bad_handshake_status: bool,
         proxy_host: Optional[str] = None,
         proxy_port: Optional[int] = None,
         verify_http: bool | str = True,
@@ -180,6 +181,8 @@ class WebSocketHandler:
             An MSAL ConfidentialClientApplication configured to get access tokens from Azure AD. Use get_client_app() to get this.
         scopes: List[str]
             The scopes to request an access token against.
+        retry_bad_handshake_status: bool
+            Whether to retry when the handshake returns a bad (non-101) status. This may indicate the API is experiencing an outage.
         proxy_host: Optional[str]
             The hostname of the proxy to use. Should be a hostname only without a scheme or port - e.g. "proxy.website.com"
         proxy_port: Optional[int]
@@ -195,6 +198,7 @@ class WebSocketHandler:
         self.proxy_host = proxy_host
         self.proxy_port = proxy_port
         self.verify_http = verify_http
+        self.retry_bad_handshake_status = retry_bad_handshake_status
 
     def connect(self):
         # instantiate new app to ensure old connection is properly cleaned up
@@ -230,13 +234,22 @@ class WebSocketHandler:
 
         # try to reconnect forever; disconnect handler will exit the app if needed
         while True:
-            self.ws.run_forever(
-                http_proxy_host=proxy_host_ip,
-                http_proxy_port=self.proxy_port,
-                proxy_type=proxy_type,
-                sslopt=ssl_options,
-                reconnect=False
-            )
+            try:
+                teardown = self.ws.run_forever(
+                    http_proxy_host=proxy_host_ip,
+                    http_proxy_port=self.proxy_port,
+                    proxy_type=proxy_type,
+                    sslopt=ssl_options
+                )
+                if teardown:
+                    self.ws.close()
+                print("Connection was closed, sleeping for 10 seconds before reconnecting.")
+                time.sleep(10)
+            except Exception as e:
+                print("An exception was in the connection loop. Sleeping for 10 seconds, then retrying.")
+                print("Exception: " + str(type(e)) + ": " + str(e))
+                self.ws.close()
+                time.sleep(10)
             
     def on_message(self, ws, message):
         # put your logic here or pass the message out using a callback
@@ -252,8 +265,9 @@ class WebSocketHandler:
             sys.exit(1)
 
         if isinstance(error, websocket.WebSocketBadStatusException):
-            print("Bad handshake status, not retrying")
-            sys.exit(1)
+            if not self.retry_bad_handshake_status:
+                print("Bad handshake status was encountered and the app was configured to not retry. Exiting the app.")
+                sys.exit(1)
 
         print("Trying to reconnect")
         # loop will retry
@@ -273,6 +287,7 @@ def create_connection(config: dict, url: str):
     proxy_port = config.get("proxy_port")
     requests_ca_bundle = get_requests_ca_bundle(config)
     app = get_client_app(config)
+    retry_bad_handshake_status = config.get("retry_bad_handshake_status", True) # default is to retry
 
     return WebSocketHandler(
         url=url,
@@ -281,6 +296,7 @@ def create_connection(config: dict, url: str):
         proxy_host=proxy_host,
         proxy_port=proxy_port,
         verify_http=requests_ca_bundle,
+        retry_bad_handshake_status=retry_bad_handshake_status
     )
 
 

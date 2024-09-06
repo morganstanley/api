@@ -39,6 +39,7 @@ Create a file, config.json, with the following properties:
  - `url`: The WebSocket URL to call. **NOTE** in a production app you probably won't source the URL like this, but this is just an example.
  - `requests_ca_bundle`: The file to use as the CA bundle when verifying HTTPS certificates. If omitted, use the default bundle shipped with the `requests` library. Please see the [SSL validation section](#ssl-validation-issues-and-the-requests-ca-bundle) for more details.
  - `disable_ssl_verification`: Explicitly disable SSL verification. **Not recommended for security reasons.**
+ - `retry_bad_handshake_status`: Whether or not to retry if the downstream API returns a handshake status other than 101 Switching Protocols. This may indicate an outage on the API and you may not always want to retry in this situation. Default value is `true`.
 
 You may use [`config-example.json`](./config-example.json) as a starting point.
 
