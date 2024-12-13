@@ -33,11 +33,6 @@ public class AuthHeaderInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         // add Authorization header to every call with this interceptor
-        Request original = chain.request();
-        Request.Builder builder = original.newBuilder();
-        builder.header("Authorization", "Bearer " + msClientAuthTokenService.getAccessToken());
-        Request request = builder.method(original.method(), original.body())
-            .build();
-        return chain.proceed(request);
+        return chain.proceed(null);
     }
 }
