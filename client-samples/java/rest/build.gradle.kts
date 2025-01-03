@@ -9,6 +9,7 @@ version = "1.0-SNAPSHOT"
 dependencies {
     implementation(group="com.google.guava", name="guava", version="${property("googleGuavaVersion")}")
     implementation(group="com.microsoft.azure", name="msal4j", version="${property("microsoftAzureMsal4jVersion")}")
+    implementation(group="com.auth0", name="java-jwt", version="${property("auth0JavaJwtVersion")}")
 
     // okhttp/retrofit
     implementation(group="com.squareup.okhttp3", name="logging-interceptor", version="${property("squareupOkhttp3Version")}")

@@ -6,6 +6,7 @@ import com.ms.infra.example.application.morganStanleyServices.MsRetrofitWrapper;
 import com.ms.infra.example.application.responseTypes.HelloWorldGetServicesResponse;
 import com.ms.infra.example.application.services.HelloWorldRestService;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -18,18 +19,16 @@ import retrofit2.Response;
 
 import java.io.IOException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class TestHelloWorldRestServiceShould {
     private MockWebServer mockWebServer;
     private HelloWorldRestService helloWorldRestService;
-    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     private final String EXAMPLE_GET_SERVICE_RESPONSE = "{\"response\":\"value\",\"time\":\"2022-01-01T00:00:00Z\"}";
     private final String MOCK_401_ERROR_RESPONSE = "{ \"statusCode\": 401, \"message\": \"Authentication required\" }";
-    private final String TEST_AUTH_TOKEN = "MOCK_BEARER_TOKEN";
+    private final String TEST_AUTH_TOKEN = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6InRydWUifQ.MAYCAQACAQA";
 
     @BeforeEach
     public void setup_hello_world_rest_service() throws IOException {
@@ -45,7 +44,7 @@ public class TestHelloWorldRestServiceShould {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .addInterceptor(authHeaderInterceptor).build();
 
-        MsRetrofitWrapper msRetrofitWrapper = new MsRetrofitWrapper(mockWebServer.url("/"), okHttpClient);
+        MsRetrofitWrapper msRetrofitWrapper = new MsRetrofitWrapper(mockWebServer.url("/"), okHttpClient, HttpLoggingInterceptor.Level.BODY);
         helloWorldRestService = msRetrofitWrapper.createService(HelloWorldRestService.class);
     }
 

@@ -4,17 +4,28 @@ import com.ms.infra.example.application.config.MicroprofileConfigService;
 import com.ms.infra.example.application.interceptors.AuthHeaderInterceptor;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import okhttp3.logging.HttpLoggingInterceptor.Level;
+
+import java.io.IOException;
 
 /**
  * This class is responsible for setting up the retrofit instance.
  * It automatically gets the config using the MicroprofileConfigService class and adds authorization interceptor to each API call.
  */
 public class MsRetrofitWrapper {
+    /**
+     * Logging
+     */
+    private static final Logger logger = LoggerFactory.getLogger(MsRetrofitWrapper.class);
+
     /**
      * Configured retrofit instance
      */
@@ -31,6 +42,12 @@ public class MsRetrofitWrapper {
     private static final MicroprofileConfigService MICROPROFILE_CONFIG_SERVICE = new MicroprofileConfigService();
 
     /**
+     * API Url
+     */
+    private final String url;
+
+    private final Level logLevel;
+    /**
      * Constructor
      * @param url API url
      * @param logLevel Log interceptor level
@@ -38,6 +55,8 @@ public class MsRetrofitWrapper {
      */
     public MsRetrofitWrapper(String url, Level logLevel) throws Exception {
         this.msClientAuthTokenService = new MsClientAuthTokenService(MICROPROFILE_CONFIG_SERVICE);
+        this.url = url;
+        this.logLevel = logLevel;
         this.retrofit = new Retrofit.Builder()
             .baseUrl(url)
             .addConverterFactory(JacksonConverterFactory.create())
@@ -50,8 +69,10 @@ public class MsRetrofitWrapper {
      * @param url API url
      * @param okHttpClient pre-configured OkHttp Client
      */
-    public MsRetrofitWrapper(HttpUrl url, OkHttpClient okHttpClient) {
+    public MsRetrofitWrapper(HttpUrl url, OkHttpClient okHttpClient, Level logLevel) {
         this.msClientAuthTokenService = null;
+        this.url = url.toString();
+        this.logLevel = logLevel;
         this.retrofit = new Retrofit.Builder()
             .baseUrl(url)
             .addConverterFactory(JacksonConverterFactory.create())
@@ -93,5 +114,17 @@ public class MsRetrofitWrapper {
      */
     public <T> T createService(Class<T> serviceInterface) {
         return this.getRetrofit().create(serviceInterface);
+    }
+
+    public void checkAuthorisation(String apiEndpoint) throws IOException {
+        Request request = new Request.Builder()
+                .url(this.url + apiEndpoint)
+                .build();
+
+        OkHttpClient httpClient = getOkHttpClient(this.logLevel);
+        // Execute the request and handle the response
+        Response response = httpClient.newCall(request).execute();
+        logger.info("Response code: {}", response.code());
+        logger.info("Response: {}", response.body().toString());
     }
 }

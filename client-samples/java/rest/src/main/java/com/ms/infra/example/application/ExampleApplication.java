@@ -14,6 +14,7 @@ import retrofit2.Response;
 
 public class ExampleApplication {
     private static final String helloWorldUrl = "https://api-uat.morganstanley.com/hello/world/v1/";
+    private static final String apiEndpoint = "services/";
     private static final Logger logger = LoggerFactory.getLogger(ExampleApplication.class);
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -24,6 +25,12 @@ public class ExampleApplication {
     public static void run() throws Exception {
         MsRetrofitWrapper msRetrofitWrapper = new MsRetrofitWrapper(helloWorldUrl, HttpLoggingInterceptor.Level.BODY);
         HelloWorldRestService helloWorldRestService = msRetrofitWrapper.createService(HelloWorldRestService.class);
+
+        // Call API and print output
+        // Use this to check authorisation
+        msRetrofitWrapper.checkAuthorisation(apiEndpoint);
+
+        // Call the hello world API and load into an object
         callHelloWorldApi(helloWorldRestService);
     }
 

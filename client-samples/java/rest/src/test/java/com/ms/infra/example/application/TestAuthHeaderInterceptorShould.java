@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestAuthHeaderInterceptorShould {
     MsClientAuthTokenService msClientAuthTokenServiceMock;
-    private final String MOCK_TOKEN = "mock-token";
+    private final String MOCK_TOKEN = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6InRydWUifQ.MAYCAQACAQA";
 
     @Rule
     public MockWebServer mockServer = new MockWebServer();

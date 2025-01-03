@@ -1,9 +1,13 @@
 package com.ms.infra.example.application.interceptors;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ms.infra.example.application.morganStanleyServices.MsClientAuthTokenService;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -11,6 +15,11 @@ import java.io.IOException;
  * This class is responsible for generating and adding an authorization token to each API call.
  */
 public class AuthHeaderInterceptor implements Interceptor {
+    /**
+     * Logger
+     */
+    private static final Logger logger = LoggerFactory.getLogger(AuthHeaderInterceptor.class);
+
     /**
      * MsClientAuthTokenService is responsible for generating bearer tokens.
      */
@@ -35,7 +44,11 @@ public class AuthHeaderInterceptor implements Interceptor {
         // add Authorization header to every call with this interceptor
         Request original = chain.request();
         Request.Builder builder = original.newBuilder();
-        builder.header("Authorization", "Bearer " + msClientAuthTokenService.getAccessToken());
+        String token = msClientAuthTokenService.getAccessToken();
+        logger.debug("Retrieved token");
+        DecodedJWT jwt = JWT.decode(token);
+
+        builder.header("Authorization", "Bearer " + token);
         Request request = builder.method(original.method(), original.body())
             .build();
         return chain.proceed(request);

@@ -13,6 +13,15 @@ Below are the example services we have configured:
 
 The `ExampleApplication.java` file shows how to use the MsRetrofitWrapper and makes a GET request to the `services` endpoint.
 
+## MsRetrofitWrapper
+This class wraps the MSAL authorization and retrofit code. 
+
+It is recommended that you take the following steps:
+- Configure the microprofile-config.properties file
+- Test authorization using the `checkAuthorisation` method.
+- Configure the retrofit service, to fit the response body of the API that you are calling.
+- Call the API and load into an object using your retrofit service.
+
 ## Running the Java Client application
 It is important to ensure that the Java SDK is installed and the `JAVA_HOME` environment variable has been set.
 This can be checked by performing the following:
