@@ -1,8 +1,8 @@
-black==24.3.0
-chardet==3.0.4
-msal==1.25.0
+black==24.10.0
+chardet==5.2.0
+msal==1.31.1
 parameterized==0.9.0
 pytest==8.3.4
-rel==0.4.7
+rel==0.4.9.19
 requests-mock==1.12.1
-six==1.15.0
+six==1.17.0

@@ -33,7 +33,7 @@ You can use `config-example.json` as a starting point.
 > NOTE: You may recieve a Thumbprint in the format 12:AB:FC:12. Please remove the ":" characters, the thumbrpint should look like 12ABFC12
 
 ## Running the application
-It is important to ensure that you have Python 3.8 or greater on your machine. To check if Python is on your machine perform the following:
+It is important to ensure that you have Python 3.9 or greater on your machine. To check if Python is on your machine perform the following:
 
 * Windows: `python --version`
 * Mac/Linux: `python --version`
