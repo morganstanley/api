@@ -14,9 +14,9 @@ To convert the `private_key.pem` to PKCS8 use the following command
 ```shell
 openssl pkcs8 -topk8 -inform PEM -outform DER -in private_key.pem -out private_key.der -nocrypt
 ```
-The `der` output format is a just an encoding format, to find out more check <https://en.wikipedia.org/wiki/X.690#DER_encoding>
+The `der` output format is just an encoding format, to find out more check <https://en.wikipedia.org/wiki/X.690#DER_encoding>
 
-Now that we have the file private key in a usable format we can use the Java Client to test the connection to Morgan Stanley's API offering.
+Now that we have the private key file in a usable format we can use the Java Client to test the connection to Morgan Stanley's API offering.
 
 ### Properties
 Make these changes to the `META-INF/microprofile-config.properties` resource file
@@ -33,6 +33,12 @@ Make these changes to the `META-INF/microprofile-config.properties` resource fil
 | `proxy-port`                      | Optional proxy port                                                                     | False    |
 
 ## Running the Java Client application
+This template is designed and tested on the following Java LTS versions:
+- 11
+- 17
+- 21
+
+
 It is important to ensure that the Java SDK is installed and the `JAVA_HOME` environment variable has been set.
 This can be checked by performing the following:
 
