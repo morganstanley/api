@@ -7,7 +7,7 @@ group = "example.application"
 version = "1.0-SNAPSHOT"
 
 dependencies {
-    implementation(group="com.microsoft.azure", name="msal4j", version="1.19.0")
+    implementation(group="com.microsoft.azure", name="msal4j", version="1.19.1")
 
     // okhttp
     implementation(group="com.squareup.okhttp3", name="logging-interceptor", version="4.12.0")
@@ -18,7 +18,7 @@ dependencies {
     implementation(group="com.squareup.retrofit2", name="retrofit", version="2.11.0")
 
     // slf4j
-    implementation(group="org.slf4j", name="slf4j-api", version="2.0.16")
+    implementation(group="org.slf4j", name="slf4j-api", version="2.0.17")
     implementation(group="org.slf4j", name="slf4j-simple", version="2.0.16")
 
     // microprofile
