@@ -1,7 +1,9 @@
 package com.ms.infra.example.application.config;
 
+import io.smallrye.config.SmallRyeConfig;
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.ConfigProvider;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +30,7 @@ public class MicroprofileConfigService {
     /**
      * Config provider
      */
-    private final Config configProvider = ConfigProvider.getConfig();
+    private final SmallRyeConfig configProvider = ConfigProvider.getConfig().unwrap(SmallRyeConfig.class);;
 
     /**
      * MS OAuth2 Token URI
