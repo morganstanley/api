@@ -19,7 +19,7 @@ dependencies {
 
     // slf4j
     implementation(group="org.slf4j", name="slf4j-api", version="2.0.17")
-    implementation(group="org.slf4j", name="slf4j-simple", version="2.0.16")
+    implementation(group="org.slf4j", name="slf4j-simple", version="2.0.17")
 
     // microprofile
     implementation(group="org.eclipse.microprofile", name="microprofile", version="7.0")
@@ -27,7 +27,9 @@ dependencies {
 
     // testing
     testImplementation(group="com.squareup.okhttp3", name="mockwebserver", version="4.12.0")
-    testImplementation(group="org.junit.jupiter", name="junit-jupiter", version="5.11.4")
+    testImplementation(platform("org.junit:junit-bom:5.12.0"))
+    testImplementation(group="org.junit.jupiter", name="junit-jupiter")
+    testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher")
     testImplementation(group="org.mockito", name="mockito-core", version="5.14.2")
 }
 
@@ -47,3 +49,4 @@ tasks {
         distributionType = Wrapper.DistributionType.ALL
     }
 }
+
