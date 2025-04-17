@@ -1,2 +1,2 @@
-msal==1.31.1
+msal==1.32.0
 websocket-client==1.6.4
