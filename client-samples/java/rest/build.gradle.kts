@@ -10,8 +10,8 @@ dependencies {
     implementation(group="com.microsoft.azure", name="msal4j", version="1.21.0")
 
     // okhttp
-    implementation(group="com.squareup.okhttp3", name="logging-interceptor", version="4.12.0")
-    implementation(group="com.squareup.okhttp3", name="okhttp", version="4.12.0")
+    implementation(group="com.squareup.okhttp3", name="logging-interceptor", version="5.1.0")
+    implementation(group="com.squareup.okhttp3", name="okhttp", version="5.1.0")
 
     // retrofit
     implementation(group="com.squareup.retrofit2", name="converter-jackson", version="3.0.0")
@@ -26,7 +26,7 @@ dependencies {
     implementation(group="io.smallrye.config", name="smallrye-config", version="3.10.2")
 
     // testing
-    testImplementation(group="com.squareup.okhttp3", name="mockwebserver", version="4.12.0")
+    testImplementation(group="com.squareup.okhttp3", name="mockwebserver", version="5.1.0")
     testImplementation(platform("org.junit:junit-bom:5.13.2"))
     testImplementation(group="org.junit.jupiter", name="junit-jupiter")
     testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher")
