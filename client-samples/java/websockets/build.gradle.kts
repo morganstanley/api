@@ -8,11 +8,11 @@ version = "1.0-SNAPSHOT"
 
 dependencies {
     // msal4j
-    implementation(group="com.microsoft.azure", name="msal4j", version="1.21.0")
+    implementation(group="com.microsoft.azure", name="msal4j", version="1.23.0")
 
     // okhttp/retrofit
-    implementation(group="com.squareup.okhttp3", name="logging-interceptor", version="4.12.0")
-    implementation(group="com.squareup.okhttp3", name="okhttp", version="4.12.0")
+    implementation(group="com.squareup.okhttp3", name="logging-interceptor", version="5.1.0")
+    implementation(group="com.squareup.okhttp3", name="okhttp", version="5.1.0")
 
     // slf4j
     implementation(group="org.slf4j", name="slf4j-api", version="2.0.17")
@@ -23,9 +23,9 @@ dependencies {
     implementation(group="io.smallrye.config", name="smallrye-config", version="3.10.2")
 
     // testing
-    testImplementation(group="com.squareup.okhttp3", name="mockwebserver", version="4.12.0")
+    testImplementation(group="com.squareup.okhttp3", name="mockwebserver", version="5.1.0")
     testImplementation(group="io.fabric8", name="mockwebserver", version="7.3.1")
-    testImplementation(platform("org.junit:junit-bom:5.13.2"))
+    testImplementation(platform("org.junit:junit-bom:5.13.4"))
     testImplementation(group="org.junit.jupiter", name="junit-jupiter")
     testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher")
     testImplementation(group="org.mockito", name="mockito-core", version="5.18.0")

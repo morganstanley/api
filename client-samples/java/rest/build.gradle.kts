@@ -7,7 +7,7 @@ group = "example.application"
 version = "1.0-SNAPSHOT"
 
 dependencies {
-    implementation(group="com.microsoft.azure", name="msal4j", version="1.21.0")
+    implementation(group="com.microsoft.azure", name="msal4j", version="1.23.0")
 
     // okhttp
     implementation(group="com.squareup.okhttp3", name="logging-interceptor", version="5.1.0")
@@ -27,7 +27,7 @@ dependencies {
 
     // testing
     testImplementation(group="com.squareup.okhttp3", name="mockwebserver", version="5.1.0")
-    testImplementation(platform("org.junit:junit-bom:5.13.2"))
+    testImplementation(platform("org.junit:junit-bom:5.13.4"))
     testImplementation(group="org.junit.jupiter", name="junit-jupiter")
     testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher")
     testImplementation(group="org.mockito", name="mockito-core", version="5.18.0")
