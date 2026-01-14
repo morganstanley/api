@@ -18,7 +18,7 @@ public class TestMicroprofileConfigServiceShould {
     private final String TEST_CLIENT_APP_SCOPE = "test-client-app-scope";
     private final String TEST_PROXY_HOST = "test-proxy-host";
     private final String TEST_PROXY_PORT = "8080";
-    private final String TEST_MS_URL = "https://api-uat.morganstanley.com/";
+    private final String TEST_MS_URL = "https://example-api-domain/";
 
     private final String INCORRECT_FILE_TYPE_NAME = "file.pem";
     private final String EXPECTED_FILE_ERROR_MESSAGE = "Incorrect file type: " + INCORRECT_FILE_TYPE_NAME + ", file type should be ";
