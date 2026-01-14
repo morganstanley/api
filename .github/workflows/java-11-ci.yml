@@ -1,0 +1,39 @@
+name: Java 11 CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: 
+      - 'client-samples/java'
+      - '.github/workflows/java-11-ci.yml'
+  pull_request:
+    branches: [ "main" ]
+    paths: 
+      - 'client-samples/java'
+      - '.github/workflows/java-11-ci.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: [rest, websockets]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Use Java 11 Gradle files
+        run: cp -r java-11-setup/** .
+        working-directory: client-samples/java/${{ matrix.project }}
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: 11
+          distribution: 'zulu'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+      - name: Gradle Build
+        run: ./gradlew build
+        working-directory: client-samples/java/${{ matrix.project }}
+      - name: Gradle Test
+        run: ./gradlew test
+        working-directory: client-samples/java/${{ matrix.project }}
