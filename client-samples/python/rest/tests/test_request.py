@@ -5,7 +5,6 @@ from unittest.mock import patch
 import requests_mock
 from parameterized import parameterized
 
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from client_application import call_api
