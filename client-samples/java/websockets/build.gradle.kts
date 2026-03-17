@@ -8,7 +8,7 @@ version = "1.0-SNAPSHOT"
 
 dependencies {
     // msal4j
-    implementation(group="com.microsoft.azure", name="msal4j", version="1.23.1")
+    implementation(group="com.microsoft.azure", name="msal4j", version="1.24.0")
 
     // okhttp/retrofit
     implementation(group="com.squareup.okhttp3", name="logging-interceptor", version="5.3.2")
