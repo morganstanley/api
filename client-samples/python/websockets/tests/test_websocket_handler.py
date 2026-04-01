@@ -8,7 +8,6 @@ from unittest.mock import MagicMock, patch
 
 from websockets.asyncio.server import serve
 
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from test_consts import MOCK_CONFIG

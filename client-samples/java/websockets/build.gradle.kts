@@ -8,7 +8,7 @@ version = "1.0-SNAPSHOT"
 
 dependencies {
     // msal4j
-    implementation(group="com.microsoft.azure", name="msal4j", version="1.23.1")
+    implementation(group="com.microsoft.azure", name="msal4j", version="1.24.0")
 
     // okhttp/retrofit
     implementation(group="com.squareup.okhttp3", name="logging-interceptor", version="5.3.2")
@@ -24,11 +24,11 @@ dependencies {
 
     // testing
     testImplementation(group="com.squareup.okhttp3", name="mockwebserver", version="5.3.2")
-    testImplementation(group="io.fabric8", name="mockwebserver", version="7.5.0")
+    testImplementation(group="io.fabric8", name="mockwebserver", version="7.6.1")
     testImplementation(platform("org.junit:junit-bom:5.13.4"))
     testImplementation(group="org.junit.jupiter", name="junit-jupiter")
     testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher")
-    testImplementation(group="org.mockito", name="mockito-core", version="5.21.0")
+    testImplementation(group="org.mockito", name="mockito-core", version="5.23.0")
 }
 
 repositories {
