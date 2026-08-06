@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.gradleup.shadow") version "8.3.9"
 }
 
 group = "example.application"
@@ -20,7 +20,7 @@ dependencies {
 
     // microprofile
     implementation(group="org.eclipse.microprofile", name="microprofile", version="7.1")
-    implementation(group="io.smallrye.config", name="smallrye-config", version="3.10.2")
+    implementation(group="io.smallrye.config", name="smallrye-config", version="3.18.1")
 
     // testing
     testImplementation(group="com.squareup.okhttp3", name="mockwebserver", version="5.3.2")
@@ -43,7 +43,7 @@ tasks {
         useJUnitPlatform()
     }
     wrapper {
-        gradleVersion = "8.10"
+        gradleVersion = "9.6.1"
         distributionType = Wrapper.DistributionType.ALL
     }
 }
