@@ -23,20 +23,22 @@ Make these changes to the `META-INF/microprofile-config.properties` resource fil
 
 | Property Name                     | Description                                                                             | Required |
 |-----------------------------------|-----------------------------------------------------------------------------------------|----------|
-| `morgan-stanley-oauth2-token-uri` | Morgan Stanley OAuth2 token endpoint URL                                                | True     |
-| `client-app-id`                   | The client id that will be sent to you from your Morgan Stanley contact                 | True     |
-| `client-app-scope`                | The scope/s that will be sent to from your Morgan Stanley contact                       | True     |
-| `private-key-file`                | The path to the private_key.der that has been created                                   | True     |
-| `public-certificate-file`         | The path to the public_key.cer that was created and sent to your Morgan Stanley contact | True     |
-| `api-url`                         | Morgan Stanley API url                                                                  | True     | 
-| `proxy-host`                      | Optional proxy host                                                                     | False    |
-| `proxy-port`                      | Optional proxy port                                                                     | False    |
+| `morgan-stanley-oauth2-token-uri` | Morgan Stanley OAuth2 token endpoint URL                                                | ✅       |
+| `client-app-id`                   | The client id that will be sent to you from your Morgan Stanley contact                 | ✅       |
+| `client-app-scope`                | The scope/s that will be sent to from your Morgan Stanley contact                       | ✅       |
+| `private-key-file`                | The path to the private_key.der that has been created                                   | ✅       |
+| `public-certificate-file`         | The path to the public_key.cer that was created and sent to your Morgan Stanley contact | ✅       |
+| `api-url`                         | Morgan Stanley API url                                                                  | ✅       |
+| `proxy-host`                      | Optional proxy host                                                                     | ❌       |
+| `proxy-port`                      | Optional proxy port                                                                     | ❌       |
 
 ## Running the Java Client application
+
 This template is designed and tested on the following Java LTS versions:
-- 11
+
 - 17
 - 21
+- 25
 
 
 It is important to ensure that the Java SDK is installed and the `JAVA_HOME` environment variable has been set.
