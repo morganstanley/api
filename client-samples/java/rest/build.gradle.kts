@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.gradleup.shadow") version "8.3.9"
 }
 
 group = "example.application"
@@ -10,8 +10,8 @@ dependencies {
     implementation(group="com.microsoft.azure", name="msal4j", version="1.25.0")
 
     // okhttp
-    implementation(group="com.squareup.okhttp3", name="logging-interceptor", version="5.3.2")
-    implementation(group="com.squareup.okhttp3", name="okhttp", version="5.3.2")
+    implementation(group="com.squareup.okhttp3", name="logging-interceptor", version="5.4.0")
+    implementation(group="com.squareup.okhttp3", name="okhttp", version="5.4.0")
 
     // retrofit
     implementation(group="com.squareup.retrofit2", name="converter-jackson", version="3.0.0")
@@ -26,8 +26,8 @@ dependencies {
     implementation(group="io.smallrye.config", name="smallrye-config", version="3.10.2")
 
     // testing
-    testImplementation(group="com.squareup.okhttp3", name="mockwebserver", version="5.3.2")
-    testImplementation(platform("org.junit:junit-bom:5.13.4"))
+    testImplementation(group="com.squareup.okhttp3", name="mockwebserver", version="5.4.0")
+    testImplementation(platform("org.junit:junit-bom:6.1.2"))
     testImplementation(group="org.junit.jupiter", name="junit-jupiter")
     testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher")
     testImplementation(group="org.mockito", name="mockito-core", version="5.23.0")
@@ -45,7 +45,7 @@ tasks {
         useJUnitPlatform()
     }
     wrapper {
-        gradleVersion = "8.10"
+        gradleVersion = "9.6.1"
         distributionType = Wrapper.DistributionType.ALL
     }
 }
