@@ -45,7 +45,7 @@ tasks {
         useJUnitPlatform()
     }
     wrapper {
-        gradleVersion = "8.10"
+        gradleVersion = "9.6.1"
         distributionType = Wrapper.DistributionType.ALL
     }
 }
