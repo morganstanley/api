@@ -66,3 +66,6 @@ updates:
       actions:
         patterns:
           - "actions/*"
+      codeql-actions:
+        patterns:
+          - "github/codeql-action/*"
