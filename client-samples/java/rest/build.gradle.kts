@@ -18,8 +18,8 @@ dependencies {
     implementation(group="com.squareup.retrofit2", name="retrofit", version="3.0.0")
 
     // slf4j
-    implementation(group="org.slf4j", name="slf4j-api", version="2.0.18")
-    implementation(group="org.slf4j", name="slf4j-simple", version="2.0.18")
+    implementation(group="org.slf4j", name="slf4j-api", version="2.0.20")
+    implementation(group="org.slf4j", name="slf4j-simple", version="2.0.20")
 
     // microprofile
     implementation(group="org.eclipse.microprofile", name="microprofile", version="7.1")
