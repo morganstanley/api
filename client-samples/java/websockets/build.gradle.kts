@@ -20,7 +20,7 @@ dependencies {
 
     // microprofile
     implementation(group="org.eclipse.microprofile", name="microprofile", version="7.1")
-    implementation(group="io.smallrye.config", name="smallrye-config", version="3.18.2")
+    implementation(group="io.smallrye.config", name="smallrye-config", version="4.0.0")
 
     // testing
     testImplementation(group="com.squareup.okhttp3", name="mockwebserver", version="5.5.0")
@@ -28,7 +28,7 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:6.1.2"))
     testImplementation(group="org.junit.jupiter", name="junit-jupiter")
     testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher")
-    testImplementation(group="org.mockito", name="mockito-core", version="5.23.0")
+    testImplementation(group="org.mockito", name="mockito-core", version="5.24.0")
 }
 
 repositories {
