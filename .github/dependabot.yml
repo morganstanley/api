@@ -1,67 +1,124 @@
 version: 2
+
 updates:
+  # Java REST sample
   - package-ecosystem: "gradle"
     directory: "/client-samples/java/rest"
     commit-message:
       prefix: "gradle"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
       day: "monday"
       time: "08:00"
-  
+      timezone: "Europe/London"
+    groups:
+      minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Java WebSocket sample
   - package-ecosystem: "gradle"
     directory: "/client-samples/java/websockets"
     commit-message:
       prefix: "gradle"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
       day: "monday"
       time: "08:00"
+      timezone: "Europe/London"
+    groups:
+      minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
+  # Python REST sample
   - package-ecosystem: "pip"
     directory: "/client-samples/python/rest"
     commit-message:
       prefix: "pip-rest"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
       day: "monday"
       time: "08:00"
+      timezone: "Europe/London"
+    groups:
+      minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
+  # Python WebSocket sample
   - package-ecosystem: "pip"
     directory: "/client-samples/python/websockets"
     commit-message:
       prefix: "pip-websocket"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
       day: "monday"
       time: "08:00"
+      timezone: "Europe/London"
+    groups:
+      minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
+  # .NET REST API template
   - package-ecosystem: "nuget"
     directory: "/client-samples/dotnet/rest/api-template"
     commit-message:
       prefix: "nuget-rest"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
       day: "monday"
       time: "08:00"
+      timezone: "Europe/London"
+    groups:
+      minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
+  # .NET REST API template tests
   - package-ecosystem: "nuget"
     directory: "/client-samples/dotnet/rest/api-template.tests"
     commit-message:
       prefix: "nuget-rest-tests"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
       day: "monday"
       time: "08:00"
+      timezone: "Europe/London"
+    groups:
+      minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
+  # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     commit-message:
       prefix: "github-actions"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
       day: "monday"
       time: "08:00"
+      timezone: "Europe/London"
     groups:
       actions:
         patterns:
