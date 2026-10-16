@@ -15,20 +15,20 @@ dependencies {
     implementation(group="com.squareup.okhttp3", name="okhttp", version="5.5.0")
 
     // slf4j
-    implementation(group="org.slf4j", name="slf4j-api", version="2.0.18")
-    implementation(group="org.slf4j", name="slf4j-simple", version="2.0.18")
+    implementation(group="org.slf4j", name="slf4j-api", version="2.0.20")
+    implementation(group="org.slf4j", name="slf4j-simple", version="2.0.20")
 
     // microprofile
     implementation(group="org.eclipse.microprofile", name="microprofile", version="7.1")
-    implementation(group="io.smallrye.config", name="smallrye-config", version="3.18.2")
+    implementation(group="io.smallrye.config", name="smallrye-config", version="4.0.0")
 
     // testing
     testImplementation(group="com.squareup.okhttp3", name="mockwebserver", version="5.5.0")
-    testImplementation(group="io.fabric8", name="mockwebserver", version="7.9.0")
-    testImplementation(platform("org.junit:junit-bom:6.1.2"))
+    testImplementation(group="io.fabric8", name="mockwebserver", version="8.0.0")
+    testImplementation(platform("org.junit:junit-bom:6.1.3"))
     testImplementation(group="org.junit.jupiter", name="junit-jupiter")
     testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher")
-    testImplementation(group="org.mockito", name="mockito-core", version="5.23.0")
+    testImplementation(group="org.mockito", name="mockito-core", version="5.24.0")
 }
 
 repositories {
