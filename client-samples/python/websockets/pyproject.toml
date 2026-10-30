@@ -1,0 +1,19 @@
+[project]
+name = "python-websockets-client-sample"
+version = "0.1.0"
+description = "Sample Python client for WebSocket APIs on the Morgan Stanley API Platform"
+requires-python = ">=3.11"
+dependencies = [
+    "msal==1.39.0",
+    "websocket-client==1.9.2",
+]
+
+[dependency-groups]
+dev = [
+    "black==26.10.1",
+    "pytest==9.1.1",
+    "websockets==17.2",
+]
+
+[tool.uv]
+package = false
