@@ -7,7 +7,7 @@ It uses the following libraries:
 It requires some simple security configuration to enable you to authenticate to the platform.
 
 ## Requirements
-- Python 3.10+
+- Python 3.11+ (uv can install this for you, see below)
 - A client application on Morgan Stanley Azure AD tenant. Please talk to your contact at Morgan Stanley to set this up.
 - A self-signed public/private key pair. Please see the client setup guide for instructions to generate this.
 - The thumbprint (also known as fingerprint) for your certificate. 
@@ -40,36 +40,44 @@ You can use `config-example.json` as a starting point.
 > NOTE: You may recieve a Thumbprint in the format 12:AB:FC:12. Please remove the ":" characters, the thumbrpint should look like 12ABFC12
 
 ## Running the application
-It is important to ensure that you have Python 3.9 or greater on your machine. To check if Python is on your machine perform the following:
+This project uses [uv](https://docs.astral.sh/uv/) to manage Python, the virtual environment and dependencies.
+Dependencies are declared in `pyproject.toml` and pinned in `uv.lock`.
 
-* Windows: `python --version`
-* Mac/Linux: `python --version` # if the version is Python 2, then use `python3` instead
+### With uv (recommended)
+Install uv by following the [installation guide](https://docs.astral.sh/uv/getting-started/installation/), then from this directory run:
 
-If the command is not recognised then you will need to install Python on your machine. 
-This can be done by visiting <https://www.python.org/downloads/> where you can follow the instructions to download and install python.
+```bash
+uv sync
+uv run client_application.py
+```
 
-Once Python is installed you can run following to launch the application. Please refer to the docs for current best practice on creating a virtual env https://docs.python.org/3/tutorial/venv.html:
+`uv sync` will download a suitable Python version if needed, create a `.venv` virtual environment and install the exact versions from `uv.lock`, including the dev dependencies.
 
-Windows:    
+### Without uv
+If you would rather not use uv, you can install from `pyproject.toml` with pip.
+You will need Python 3.11 or greater and pip 25.1 or greater (for `--group` support). Check your Python version with `python --version` (on Mac/Linux, use `python3` if this shows Python 2).
+If Python is not installed, you can download it from <https://www.python.org/downloads/>.
+
+Note that pip does not read `uv.lock`: the direct dependencies are pinned in `pyproject.toml`, but their sub-dependencies may resolve to different versions than CI uses.
+
+Windows:
 ```cmd
-python -m venv venv
-.\venv\Scripts\activate
+python -m venv .venv
+.\.venv\Scripts\activate
 
 python -m pip install --upgrade pip
-pip install -r requirements.txt
-pip install -r dev-requirements.txt
+pip install . --group dev
 
 python client_application.py
 ```
 
-Mac/Linux:   
+Mac/Linux:
 ```bash
-python -m venv venv
-. venv/bin/activate
+python -m venv .venv
+. .venv/bin/activate
 
-pip install --upgrade pip
-pip install -r requirements.txt
-pip install -r dev-requirements.txt
+python -m pip install --upgrade pip
+pip install . --group dev
 
 python client_application.py
 ```
@@ -79,16 +87,19 @@ The application will launch and connect to the Morgan Stanley API offering and o
 ## Testing
 The tests have been built using the `unittest` framework, but can be run using the `pytest` command.
 ```bash
-pytest tests
+uv run pytest tests
 ```
+
+If you are not using uv, run `pytest tests` from inside the activated virtual environment.
 
 ## Linting
-This project uses `black` to lint its source code for readability. 
-To lint the code from inside the virtual env please run the following:
+This project uses `black` to lint its source code for readability. To lint the code please run the following:
 
 ```bash
-black .
+uv run black .
 ```
+
+If you are not using uv, run `black .` from inside the activated virtual environment.
 
 ## SSL Validation issues and the `requests` CA bundle
 Some organisations use an internal network separated from the Internet at large by a secure proxy. 
@@ -111,11 +122,13 @@ You may wish to engage the support of an engineering team at your organisation i
 On Windows, this problem can be solved by installing an additional library called `pip_system_certs`. 
 You can find the homepage for this library at <https://pypi.org/project/pip-system-certs/>.
 
-After installing the other dependencies as explained in the Installation section:
+After installing the other dependencies as explained in the [Running the application](#running-the-application) section:
 
 ```cmd
-pip install pip_system_certs
+uv add pip_system_certs
 ```
+
+Or, if you are not using uv, run `pip install pip_system_certs` from inside the activated virtual environment.
 
 ### Linux 
 
