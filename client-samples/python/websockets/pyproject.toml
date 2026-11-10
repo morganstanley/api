@@ -12,7 +12,7 @@ dependencies = [
 dev = [
     "black==26.10.1",
     "pytest==9.2.0",
-    "websockets==17.3",
+    "websockets==17.4",
 ]
 
 [tool.uv]
