@@ -7,7 +7,7 @@ group = "example.application"
 version = "1.0-SNAPSHOT"
 
 dependencies {
-    implementation(group="com.microsoft.azure", name="msal4j", version="1.26.0")
+    implementation(group="com.microsoft.azure", name="msal4j", version="1.26.1")
 
     // okhttp
     implementation(group="com.squareup.okhttp3", name="logging-interceptor", version="5.5.1")
@@ -23,7 +23,7 @@ dependencies {
 
     // microprofile
     implementation(group="org.eclipse.microprofile", name="microprofile", version="7.1")
-    implementation(group="io.smallrye.config", name="smallrye-config", version="4.1.0")
+    implementation(group="io.smallrye.config", name="smallrye-config", version="4.2.2")
 
     // testing
     testImplementation(group="com.squareup.okhttp3", name="mockwebserver", version="5.5.1")
