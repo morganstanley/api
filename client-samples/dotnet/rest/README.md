@@ -4,7 +4,7 @@ This project is a starting template for integrating with REST APIs on the API Pl
 It requires some simple security configuration to enable you to authenticate to the platform.
 
 ## Requirements
-- .NET 9.0.x
+- .NET 10.0.x
 - A client application on Morgan Stanley Azure AD tenant. Please talk to your contact at Morgan Stanley to set this up.
 - A self-signed public/private key pair. Please see the client setup guide for instructions to generate this.
 
