@@ -1,21 +1,13 @@
-import os
-import sys
 import asyncio
 import threading
-from time import sleep
-import unittest
-from unittest.mock import MagicMock, patch
+import time
+from unittest.mock import MagicMock
 
+import pytest
 from websockets.asyncio.server import serve
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
-from test_consts import MOCK_CONFIG
+import client
 from client import create_connection
-
-LOCAL_MOCK_CONFIG = MOCK_CONFIG.copy()
-LOCAL_MOCK_CONFIG["proxy_host"] = None
-LOCAL_MOCK_CONFIG["proxy_port"] = None
 
 MOCK_TOKEN = "mock_token"
 
@@ -35,62 +27,47 @@ async def run_server():
         await server.serve_forever()
 
 
-def start_echo_server():
-    asyncio.run(run_server())
+@pytest.fixture
+def websocket_server():
+    """
+    Start a local WebSocket server that sends one message to each client.
+    The thread is a daemon, so it stops when the test run ends.
+    """
+    server_thread = threading.Thread(
+        target=lambda: asyncio.run(run_server()), daemon=True
+    )
+    server_thread.start()
+    time.sleep(1)
+    return API_URL
 
 
-class TestApiCall(unittest.TestCase):
-    def setUp(self):
-        """
-        setUp function runs before each unit test.
-        Sets up patches
-        """
-        self.acquire_token_patch = patch(
-            "client.acquire_token", return_value=MOCK_TOKEN
-        )
-        self.get_client_app_patch = patch("client.get_client_app", return_value=None)
-        self.get_requests_ca_bundle_patch = patch(
-            "client.get_requests_ca_bundle", return_value=None
-        )
-        self.acquire_token_patch.start()
-        self.get_client_app_patch.start()
-        self.get_requests_ca_bundle_patch.start()
-
-    def tearDown(self):
-        """
-        tearDown function runs after each unit test.
-        """
-        self.acquire_token_patch.stop()
-        self.get_client_app_patch.stop()
-        self.get_requests_ca_bundle_patch.stop()
-
-    def connect(self):
-        self.websocket_handler.connect(retry=False)
-
-    def test_websocket_handler_connects_and_receives_messgae(self):
-        """
-        Connect to a websockets echo server, and test websocket handler can connect and recieve messages.
-        """
-        # As the thread is set as a daemon, the code will exit, once main thread is done.
-        server_thread = threading.Thread(target=start_echo_server, daemon=True)
-        server_thread.start()
-        sleep(1)
-
-        self.websocket_handler = create_connection(LOCAL_MOCK_CONFIG, API_URL)
-        self.websocket_handler.on_open = MagicMock()
-        self.websocket_handler.on_message = MagicMock()
-
-        thread = threading.Thread(target=self.connect)
-        thread.start()
-        thread.join(timeout=5)
-
-        # If thread is still alive after 5 seconds, fail the test
-        if thread.is_alive():
-            self.fail("websocket_handler.connect() took longer than 5 seconds to run")
-
-        self.websocket_handler.on_open.assert_called_once()
-        self.websocket_handler.on_message.assert_called_once()
+@pytest.fixture(autouse=True)
+def mock_auth(monkeypatch):
+    """
+    Skip Azure AD: replace the MSAL client app and the token request with stubs.
+    """
+    monkeypatch.setattr(client, "acquire_token", lambda app, scopes: MOCK_TOKEN)
+    monkeypatch.setattr(client, "get_client_app", lambda config: None)
+    monkeypatch.setattr(client, "get_requests_ca_bundle", lambda config: None)
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_websocket_handler_connects_and_receives_message(mock_config, websocket_server):
+    """
+    Connect to a local WebSocket server, and test the handler can connect and receive messages.
+    """
+    mock_config["proxy_host"] = None
+    mock_config["proxy_port"] = None
+
+    websocket_handler = create_connection(mock_config, websocket_server)
+    websocket_handler.on_open = MagicMock()
+    websocket_handler.on_message = MagicMock()
+
+    thread = threading.Thread(target=websocket_handler.connect, kwargs={"retry": False})
+    thread.start()
+    thread.join(timeout=5)
+
+    if thread.is_alive():
+        pytest.fail("websocket_handler.connect() took longer than 5 seconds to run")
+
+    websocket_handler.on_open.assert_called_once()
+    websocket_handler.on_message.assert_called_once()

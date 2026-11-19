@@ -17,3 +17,8 @@ dev = [
 
 [tool.uv]
 package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# make the sample importable from the tests without sys.path changes
+pythonpath = ["."]
