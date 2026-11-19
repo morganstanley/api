@@ -38,10 +38,10 @@ updates:
           - "patch"
 
   # Python REST sample
-  - package-ecosystem: "pip"
+  - package-ecosystem: "uv"
     directory: "/client-samples/python/rest"
     commit-message:
-      prefix: "pip-rest"
+      prefix: "uv-rest"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -56,10 +56,10 @@ updates:
           - "patch"
 
   # Python WebSocket sample
-  - package-ecosystem: "pip"
+  - package-ecosystem: "uv"
     directory: "/client-samples/python/websockets"
     commit-message:
-      prefix: "pip-websocket"
+      prefix: "uv-websocket"
     schedule:
       interval: "weekly"
       day: "monday"

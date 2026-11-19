@@ -1,45 +1,29 @@
-import os
-import sys
-import unittest
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
-from client_application import load_config, get_proxies
-from test_consts import MOCK_CONFIG
-
-TEST_PROXY_HOST = MOCK_CONFIG["proxy_host"]
-TEST_PROXY_PORT = MOCK_CONFIG["proxy_port"]
-TEST_PROXY_CONFIG = {
-    "http": f"{TEST_PROXY_HOST}:{TEST_PROXY_PORT}",
-    "https": f"{TEST_PROXY_HOST}:{TEST_PROXY_PORT}",
-}
+from client_application import get_proxies, load_config
+from conftest import TEST_CONFIG_FILE
 
 
-class TestConfigSetup(unittest.TestCase):
-    def test_config(self):
-        """
-        Test that the correct config is loaded.
-        """
-        config = load_config("./tests/test-config.json")
-        assert config == MOCK_CONFIG, "Config loaded correctly"
-
-    def test_proxies(self):
-        """
-        Test that the correct proxies are loaded.
-        """
-        proxies = get_proxies(MOCK_CONFIG)
-        assert proxies == TEST_PROXY_CONFIG, "Proxies loaded correctly"
-
-    def test_null_proxy_config(self):
-        """
-        Test that no proxies are loaded when the proxy_host and proxy_port are not provided.
-        """
-        config = MOCK_CONFIG.copy()
-        config.pop("proxy_host")
-        config.pop("proxy_port")
-        proxies = get_proxies(config)
-        assert proxies == None, "Proxies not loaded"
+def test_config(mock_config):
+    """
+    Test that the correct config is loaded.
+    """
+    assert load_config(TEST_CONFIG_FILE) == mock_config
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_proxies(mock_config):
+    """
+    Test that the correct proxies are loaded.
+    """
+    assert get_proxies(mock_config) == {
+        "http": "PROXY-HOST:PROXY-PORT",
+        "https": "PROXY-HOST:PROXY-PORT",
+    }
+
+
+def test_null_proxy_config(mock_config):
+    """
+    Test that no proxies are loaded when the proxy_host and proxy_port are not provided.
+    """
+    del mock_config["proxy_host"]
+    del mock_config["proxy_port"]
+
+    assert get_proxies(mock_config) is None
